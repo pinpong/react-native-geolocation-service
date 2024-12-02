@@ -3,6 +3,7 @@ package com.agontuk.RNFusedLocation;
 import android.app.Activity;
 import android.content.Intent;
 import android.location.Location;
+import android.provider.Settings;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -138,6 +139,17 @@ public class RNFusedLocationModule extends ReactContextBaseJavaModule implements
     if (continuousLocationProvider != null) {
       continuousLocationProvider.removeLocationUpdates();
       continuousLocationProvider = null;
+    }
+  }
+
+  @ReactMethod
+  public void openLocationSourceSettings() {
+    ReactApplicationContext context = getContext();
+    Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+    intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+    if (intent.resolveActivity(context.getPackageManager()) != null) {
+        context.startActivity(intent);
     }
   }
 

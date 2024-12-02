@@ -108,6 +108,14 @@ const Geolocation = {
 
       subscriptions = [];
     }
+  },
+
+  openLocationSourceSettings: () => {
+    if (Platform.OS === 'ios') {
+      console.warn('OpenLocationSourceSettings not supported on IOS');
+    } else {
+      RNFusedLocation.openLocationSourceSettings();
+    }
   }
 };
 

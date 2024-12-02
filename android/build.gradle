@@ -13,11 +13,11 @@ def safeExtGet(prop, fallback) {
 android {
   def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
   if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
-    namespace "com.geoloc"
+    namespace "com.agontuk.RNFusedLocation"
 
     def manifestFile = file("${projectDir}/src/main/AndroidManifest.xml")
     def manifestContent = manifestFile.getText()
-    manifestContent = manifestContent.replaceAll("package=\"com.geoloc\"", '')
+    manifestContent = manifestContent.replaceAll("package=\"com.agontuk.RNFusedLocation\"", '')
 
     manifestFile.write(manifestContent)
   }

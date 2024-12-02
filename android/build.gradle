@@ -11,6 +11,17 @@ def safeExtGet(prop, fallback) {
 }
 
 android {
+  def agpVersion = com.android.Version.ANDROID_GRADLE_PLUGIN_VERSION
+  if (agpVersion.tokenize('.')[0].toInteger() >= 7) {
+    namespace "com.geoloc"
+
+    def manifestFile = file("${projectDir}/src/main/AndroidManifest.xml")
+    def manifestContent = manifestFile.getText()
+    manifestContent = manifestContent.replaceAll("package=\"com.geoloc\"", '')
+
+    manifestFile.write(manifestContent)
+  }
+
   compileSdkVersion safeExtGet('compileSdkVersion', DEFAULT_COMPILE_SDK_VERSION)
   buildToolsVersion safeExtGet('buildToolsVersion', DEFAULT_BUILD_TOOLS_VERSION)
 
